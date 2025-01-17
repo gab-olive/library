@@ -11,18 +11,18 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #fafafa; 
 }
 .header {
     display: flex;
     box-sizing: border-box;
-    background-color: rgb(204, 204, 204);
+    background-color: #264653;
     width: 100%;
     font-size: 4rem;
+    color: white;
     padding: 20px;
 }
 button {
-    background-color: #007BFF; 
+    background-color: #f4a261; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -35,31 +35,34 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #d68e54;
 }
 
 .logo {
     margin-left: 30%;
+    border-bottom: 2px solid #ccc;
 }
 
 .main {
-    background-color: #ffffff;
+    background-color: #2a9d8f;
     flex: 1;
     padding: 20px;
 }
 
 .footer {
+    box-sizing: border-box;
     justify-self: flex-end;
     width: 100%;
-    background-color: rgb(172, 170, 170);
+    background-color: #264653;
     text-align: center;
     font-size: 2rem;
+    padding: 1rem;
+    color: white;
 }
 
 label {
     display: block;
     font-size: 1.5rem;
-    color: #333;
 }
 
 .books {
@@ -74,8 +77,8 @@ label {
     flex-direction: column;
     gap: 10px;
     font-size: 1.1rem;
-    background-color: #f0f0f0; 
-    color: #333; 
+    background-color: #264653; 
+    color: white; 
     padding: 30px;
     padding-top: 15px;
     border-radius: 15px;
@@ -94,7 +97,8 @@ label {
 
 form {
     box-sizing: border-box;
-    background-color: #ccc;
+    background-color: #264653;
+    color: white;
     padding: 50px;
     border-radius: 15px;
     width: 25%;

@@ -24,15 +24,12 @@ const authorInput = document.createElement("input")
 const pageLabel =  document.createElement("label")
 const pageInput = document.createElement("input")
 
-const readtrueDiv = document.createElement("div")
-const readtrueLabel = document.createElement("label")
-const readtrueInput = document.createElement("input")
+const readLabel = document.createElement("label")
+const readInput = document.createElement("input")
 
-const readfalseDiv = document.createElement("div")
-const readfalseLabel = document.createElement("label")
-const readfalseInput = document.createElement("input")
 
 const submit = document.createElement("button")
+
 
 titleLabel.textContent = "Book title"
 titleLabel.setAttribute('for', 'title')
@@ -49,28 +46,10 @@ pageLabel.setAttribute('for', 'pages')
 pageInput.setAttribute('type', 'text')
 pageInput.setAttribute('id', 'pages')
 
-readtrueLabel.textContent = "Read"
-readtrueLabel.setAttribute('for', 'read')
-readtrueInput.setAttribute('type', 'radio')
-readtrueInput.setAttribute('id', 'read')
-readtrueInput.setAttribute('value', 'yes')
-readtrueInput.setAttribute('name' , 'read')
-
-readtrueDiv.appendChild(readtrueLabel)
-readtrueDiv.appendChild(readtrueInput)
-readtrueDiv.setAttribute("style", "display: flex; gap: 20px")
-
-readfalseLabel.textContent = "Not read"
-readfalseLabel.setAttribute('for', 'read')
-readfalseInput.setAttribute('type', 'radio')
-readfalseInput.setAttribute('id', 'read')
-readfalseInput.setAttribute('value', 'no')
-readfalseInput.setAttribute('name' , 'read')
-readfalseDiv.setAttribute("style", "display: flex; gap: 20px")
-
-
-readfalseDiv.appendChild(readfalseLabel)
-readfalseDiv.appendChild(readfalseInput)
+readLabel.textContent = "Have you read it?"
+readLabel.setAttribute('for', 'read')
+readInput.setAttribute('type', 'checkbox')
+readInput.setAttribute('id', 'read')
 
 submit.textContent = "Add book"
 submit.setAttribute("type", "submit")
@@ -78,39 +57,43 @@ submit.setAttribute("type", "submit")
 const newbook = document.querySelector(".add-button")
 
 function displayBooks(){
-    
-    books.innerHTML = ""
+    books.innerHTML = ""; // Limpa o conteúdo existente
 
     myLibrary.forEach((book) => {
-        const card = document.createElement("div")
-        card.classList.add("card")
+        const card = document.createElement("div");
+        card.classList.add("card");
 
-        const titleDiv = document.createElement("div")
-        titleDiv.classList.add("title")
-        titleDiv.textContent = book.title
+        const titleDiv = document.createElement("div");
+        titleDiv.classList.add("title");
+        titleDiv.textContent = book.title;
 
-        const authorDiv = document.createElement("div")
-        authorDiv.classList.add("author")
-        authorDiv.textContent = book.author
-        
-        const pagesDiv = document.createElement("div")
-        pagesDiv.classList.add("pages")
-        pagesDiv.textContent = book.pages
+        const authorDiv = document.createElement("div");
+        authorDiv.classList.add("author");
+        authorDiv.textContent = book.author;
 
-        const readDiv = document.createElement("div")
-        readDiv.classList.add("read")
-        readDiv.textContent = book.read
+        const pagesDiv = document.createElement("div");
+        pagesDiv.classList.add("pages");
+        pagesDiv.textContent = `${book.pages} pages`;
 
+        const readButton = document.createElement("button");
+        readButton.classList.add("read");
+        readButton.textContent = book.read ? "Read" : "Not Read";
+        readButton.style.backgroundColor = book.read ? "#2a9d8f" : "#e76f51";
+        let isRead = book.read
+        readButton.addEventListener('click', () => {
+            isRead = !isRead
+            readButton.style.backgroundColor = isRead ? "#2a9d8f" : "#e76f51";
+            readButton.textContent = isRead ? "Read" : "Not read";
+});
         card.appendChild(titleDiv);
         card.appendChild(authorDiv);
         card.appendChild(pagesDiv);
-        card.appendChild(readDiv);
+        card.appendChild(readButton);
 
-        // append card to books container
+        // Adiciona o card ao container de livros
         books.appendChild(card);
     })
-    
-}
+    };
 
 newbook.addEventListener('click' , () => {
     form.innerHTML = "";
@@ -124,8 +107,8 @@ newbook.addEventListener('click' , () => {
     form.appendChild(pageLabel)
     form.appendChild(pageInput)
 
-    form.appendChild(readtrueDiv)
-    form.appendChild(readfalseDiv)
+    form.appendChild(readLabel)
+    form.appendChild(readInput)
 
     form.appendChild(submit)
 
@@ -138,7 +121,7 @@ form.addEventListener('submit', (e) => {
     const title = titleInput.value
     const author = authorInput.value
     const pages = pageInput.value
-    const read = readtrueInput.value
+    const read = readInput.checked
     
     const book = new Book(title, author, pages, read)
     console.log(book)
@@ -147,6 +130,4 @@ form.addEventListener('submit', (e) => {
     displayBooks();
     form.reset()
     main.removeChild(form)
-    
 })
-
